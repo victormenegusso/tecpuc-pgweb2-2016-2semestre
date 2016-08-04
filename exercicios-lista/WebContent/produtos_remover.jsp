@@ -1,3 +1,4 @@
+<%@page import="tecpuc.lista.Produto"%>
 <%@page import="java.util.ArrayList"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,19 +12,19 @@
 <body>
 <H1>Remover Seriado</H1>	
 <form>
-	Nome Seriado: <input name="nome-seriado" /><br/>
+	Nome Produto: <input name="nome" /><br/>
 	<input value="remover" name="btn" type="submit"/>
 </form>
 
-<a href="seriados_menu.jsp"> voltar menu </a>
+<a href="produtos_menu.jsp"> voltar menu </a><br/>
 
 </body>
 </html>
 <%
 	if(request.getParameter("btn") != null)
 	{
-		String seriado = request.getParameter("nome-seriado");
-		ArrayList<String> lista = (ArrayList<String>)request.getSession().getAttribute("seriados-lista");
+				String nome = request.getParameter("nome");
+		ArrayList<Produto> lista = (ArrayList<Produto>)request.getSession().getAttribute("produtos-lista");
 		
 		// verifica se não existe a lista
 		if(lista == null)
@@ -32,18 +33,23 @@
 		}
 		else
 		{
-			String seriadoRemover = null;
-			for(String srd : lista)
+			Produto produtoEncontrado = null;
+			for(Produto produto : lista)
 			{
-				if(srd.equals(seriado))
+				if( produto.getNome().equals(nome) )
 				{
-					seriadoRemover = srd;
+					produtoEncontrado = produto;
 				}
 			}
 			
-			if(seriadoRemover != null)
+			if(produtoEncontrado != null)
 			{
-				lista.remove(seriadoRemover);
+				lista.remove(produtoEncontrado);
+				out.print("Removido");
+				out.print("<br/>");
+				out.print(produtoEncontrado.getNome());
+				out.print("<br/>");
+				out.print(produtoEncontrado.getDescricao());
 			}
 			else
 				out.print("nao encontrado");
