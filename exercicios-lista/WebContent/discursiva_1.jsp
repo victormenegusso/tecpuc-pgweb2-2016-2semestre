@@ -8,15 +8,17 @@
 <title>Teste</title>
 </head>
 <body>
-<h1>O que será exibido ?</h1>
-<h2>Resposta: samara</h2>
-<%
-	ArrayList<String> lista = new ArrayList<String>();
-	lista.add("victor");
-	lista.add("heitor");
-	lista.add("samara");
-	
-	out.print( lista.get(2) );
-%>
+
+<p><font face="georgia, serif" size="4">[1] Para cada item, colocar uma lista que o item pode possuir, por exemplo: Uma Loja tem uma lista de produtos. Seguem os itens:</font></p>
+<ul><li><span style="font-family:georgia,serif;font-size:large;line-height:1.5;background-color:transparent">Escola.</span></li><li><span style="font-family:georgia,serif;font-size:large;line-height:1.5;background-color:transparent">Álbum.</span></li><li><span style="font-family:georgia,serif;font-size:large;line-height:1.5;background-color:transparent">CD.</span></li><li><span style="font-family:georgia,serif;font-size:large;line-height:1.5;background-color:transparent">Estante.</span></li><li><span style="font-family:georgia,serif;font-size:large;line-height:1.5;background-color:transparent">Concurso público.</span></li><li><span style="font-family:georgia,serif;font-size:large;line-height:1.5;background-color:transparent">Zoológico.</span></li><li><span style="font-family:georgia,serif;font-size:large;line-height:1.5;background-color:transparent">Banco.</span></li></ul>
+
+<h1>Respostas</h1>
+<p>alunos / professores / salas / aulas </p>
+<p>Fotos</p>
+<p>Músicas</p>
+<p>Libros</p>
+<p>Provas / Candidatos</p>
+<p>Conta / Funcionários</p>
+
 </body>
 </html>

@@ -32,8 +32,10 @@
 		
 	out.print( lista.size() );
 	out.print("<br/>");
-	for(Campeao cmp : lista)
+	for( int i = 0; i < lista.size(); i++ )
 	{
+		Campeao cmp = lista.get(i);
+		
 		out.print( cmp.getNome() );
 		out.print("<br/>");
 		

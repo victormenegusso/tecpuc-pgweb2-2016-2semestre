@@ -1,4 +1,3 @@
-<%@page import="tecpuc.lista.Campeao"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,33 +10,21 @@
 <body>
 <h1>O que será exibido ?</h1>
 <h2>Resposta:</h2>
-<h3>2</h3>
-<h3>Nasus</h3>
-<h3>Lutador</h3>
-<h3>Morgana</h3>
-<h3>Mago</h3>
+<h3>3</h3>
+<h3>Metallica</h3>
+<h3>Black Label Society</h3>
+<h3>Kiss</h3>
 <%
-	ArrayList<Campeao> lista = new ArrayList<Campeao>();
-	Campeao c;
-	
-	c = new Campeao();
-	c.setNome("Nasus");
-	c.setTipo("Lutador");
-	lista.add( c );
-	
-	c = new Campeao();
-	c.setNome("Morgana");
-	c.setTipo("Mago");
-	lista.add( c );
+	ArrayList<String> lista = new ArrayList<String>();
+	lista.add("Metallica");
+	lista.add("Black Label Society");
+	lista.add("Kiss");
 		
 	out.print( lista.size() );
 	out.print("<br/>");
-	for(Campeao cmp : lista)
+	for(int i = 0; i < lista.size(); i++)
 	{
-		out.print( cmp.getNome() );
-		out.print("<br/>");
-		
-		out.print( cmp.getTipo() );
+		out.print( lista.get(i) );
 		out.print("<br/>");
 	}	
 %>

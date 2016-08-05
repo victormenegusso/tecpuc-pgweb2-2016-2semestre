@@ -10,25 +10,18 @@
 <body>
 <h1>O que será exibido ?</h1>
 <h2>Resposta:</h2>
-<h3>4</h3>
-<h3>Skyrim</h3>
-<h3>GTA V</h3>
-<h3>Call of Duty</h3>
-<h3>Lineage 2</h3>
+<h3>heitor</h3>
+<h3>samara</h3>
 <%
 	ArrayList<String> lista = new ArrayList<String>();
-	lista.add("Skyrim");
-	lista.add("GTA V");
-	lista.add("Call of Duty");
-	lista.add("Lineage 2");
-		
-	out.print( lista.size() );
+	lista.add("victor");
+	lista.add("heitor");
+	lista.add("samara");
+	
+	out.print( lista.get(1) );
+	lista.remove(1);
 	out.print("<br/>");
-	for(String str : lista)
-	{
-		out.print( str );
-		out.print("<br/>");
-	}	
+	out.print( lista.get(1) );
 %>
 </body>
 </html>

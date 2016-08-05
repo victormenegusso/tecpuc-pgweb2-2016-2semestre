@@ -12,6 +12,7 @@
 <h2>Resposta:</h2>
 <h3>heitor</h3>
 <h3>samara</h3>
+<h3>victor</h3>
 <%
 	ArrayList<String> lista = new ArrayList<String>();
 	lista.add("victor");
@@ -19,9 +20,10 @@
 	lista.add("samara");
 	
 	out.print( lista.get(1) );
-	lista.remove(1);
 	out.print("<br/>");
-	out.print( lista.get(1) );
+	out.print( lista.get(2) );
+	out.print("<br/>");
+	out.print( lista.get(0) );
 %>
 </body>
 </html>
