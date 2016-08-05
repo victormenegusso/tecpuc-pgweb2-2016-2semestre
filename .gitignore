@@ -1,4 +1,6 @@
 Servers
 RemoteSystemsTempFiles
 .metadata
+*build/
+
 

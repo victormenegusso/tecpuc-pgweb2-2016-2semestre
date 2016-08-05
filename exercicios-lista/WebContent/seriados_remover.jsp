@@ -32,18 +32,9 @@
 		}
 		else
 		{
-			String seriadoRemover = null;
-			for(String srd : lista)
+			if(lista.remove(seriado))
 			{
-				if(srd.equals(seriado))
-				{
-					seriadoRemover = srd;
-				}
-			}
-			
-			if(seriadoRemover != null)
-			{
-				lista.remove(seriadoRemover);
+				out.print(seriado+" removido");
 			}
 			else
 				out.print("nao encontrado");

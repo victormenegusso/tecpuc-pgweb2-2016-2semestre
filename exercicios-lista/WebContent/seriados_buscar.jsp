@@ -32,16 +32,7 @@
 		}
 		else
 		{
-			boolean encontrado = false;
-			for(String srd : lista)
-			{
-				if(srd.equals(seriado))
-				{
-					encontrado = true;
-				}
-			}
-			
-			if(encontrado)
+			if(lista.contains(seriado))
 				out.print("encontrado");
 			else
 				out.print("nao encontrado");
