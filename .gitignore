@@ -2,5 +2,9 @@ Servers
 RemoteSystemsTempFiles
 .metadata
 *build/
+*.jar
+*.war
+.recommenders/
+
 
 
