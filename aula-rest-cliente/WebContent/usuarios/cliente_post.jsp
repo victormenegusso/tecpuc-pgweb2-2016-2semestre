@@ -1,3 +1,4 @@
+<%@page import="java.io.OutputStream"%>
 <%@page import="com.google.gson.JsonParser"%>
 <%@page import="com.google.gson.JsonElement"%>
 <%@page import="java.io.InputStreamReader"%>
@@ -15,27 +16,45 @@
 	<%
 		if(request.getParameter("enviar")!= null)
 		{
-			URL url = new URL("http://localhost:8080/aula-rest-servidor/webapi/usuario");
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.set
-			conn.setRequestMethod("POST");
-			if (conn.getResponseCode() != 200) {
-				out.print("deu erro... HTTP error code : " + conn.getResponseCode());
+			try {
+
+				URL url = new URL("http://localhost:8080/aula-rest-servidor/webapi/usuario");
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn.setDoOutput(true);
+				conn.setRequestMethod("POST");
+				conn.setRequestProperty("Content-Type", "application/json");
+	
+				String input = "{\"nome\":\"teste123\",\"senha\":\"teste123\",\"email\":\"teste123\",\"papel\":\"teste123\"}";
+				System.out.println(input);
+				OutputStream os = conn.getOutputStream();
+				os.write(input.getBytes());
+				os.flush();
+	
+				if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+					out.print("deu erro : HTTP error code : " + conn.getResponseCode());
+				}
+	
+				BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+	
+				String output;
+				System.out.println("Output from Server .... \n");
+				while ((output = br.readLine()) != null) {
+					System.out.println(output);
+				}
+	
+				conn.disconnect();
+				out.print("deu certo");
+	
+			} 
+			catch (Exception e) {
+				out.print("deu erro");
+				e.printStackTrace();
 			}
-	
-			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-	
-			String output,json="";
-			while ((output = br.readLine()) != null) {
-				json+= output;
-			}
-	
-			conn.disconnect();
 		}
 	%>
 	
 <body>
-	<form action="webapi/usuario" method="post">
+	<form method="post">
 
 
 		Nome: <input name="nome" /><br> 

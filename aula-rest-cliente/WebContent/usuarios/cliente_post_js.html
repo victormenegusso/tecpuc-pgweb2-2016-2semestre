@@ -5,10 +5,19 @@
 </head>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
-	function adicionaCerveja() {
+	host = "http://localhost:8080/aula-rest-servidor/webapi/";
+	function adicionaUsuario() {
+		var nome = $('[name=nome]').val();
+		var senha = $('[name=senha]').val();
+		var email = $('[name=email]').val();
+		var papel = $('[name=papel]').val();
+		var data = '{"nome": "'+nome+'","senha":"'+senha+'","email":"'+email+'","papel":"'+papel+'"}"';
+		alert(data);
+		
 		$.ajax({
-			url : host + 'cervejas',
+			url : host + 'usuario',
 			type : 'POST',
+			contentType : 'application/json',
 			data : data,
 			success : function(data) {
 				alert("Incluído	com	sucesso!");
@@ -17,17 +26,18 @@
 				alert("Ocorreu	um	erro");
 			}
 		});
+		
 	}
 </script>
 
 <body>
-	<form action="webapi/usuario" method="post">
+	<form method="post">
 
 
 		Nome: <input name="nome" /><br> Email: <input name="email" /><br>
 		Senha: <input name="senha" /><br> Papel: <input name="papel" /><br>
 
-		<input type="button" value="Criar" onclick="adicionaCerveja();" />
+		<input type="button" value="Criar" onclick="adicionaUsuario();" />
 	</form>
 </body>
 </html>
