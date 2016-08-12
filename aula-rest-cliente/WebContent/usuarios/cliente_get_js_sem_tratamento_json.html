@@ -1,0 +1,38 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;	charset=UTF-8">
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	
+	host = "http://localhost:8080/aula-rest-servidor/webapi/";
+
+	function listarUsuarios() {
+		$.ajax({
+			url : host + 'usuario',
+			type : 'GET',
+			success : function(data) {
+				$("#painel").append( JSON.stringify(data) );
+			},
+			error : function(data) {
+				alert("Erro	na	invocação");
+			}
+		});
+	}
+
+	function adicionaUsuarioGrid(usuario) {
+		var data = "<tr>" 
+			+ "<td>" + usuario.nome + "</td>" 
+			+ "<td>" + usuario.email + "</td>" 
+			+ "<td>" + usuario.papel + "</td>"
+			+ "</tr>";
+		
+		
+	}
+</script>
+</head>
+<body>
+	<div id="painel"></div>
+</body>
+<script type="text/javascript">
+	listarUsuarios();
+</script>

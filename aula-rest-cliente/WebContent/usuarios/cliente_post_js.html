@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	function adicionaCerveja() {
+		$.ajax({
+			url : host + 'cervejas',
+			type : 'POST',
+			data : data,
+			success : function(data) {
+				alert("Incluído	com	sucesso!");
+			},
+			error : function(data) {
+				alert("Ocorreu	um	erro");
+			}
+		});
+	}
+</script>
+
+<body>
+	<form action="webapi/usuario" method="post">
+
+
+		Nome: <input name="nome" /><br> Email: <input name="email" /><br>
+		Senha: <input name="senha" /><br> Papel: <input name="papel" /><br>
+
+		<input type="button" value="Criar" onclick="adicionaCerveja();" />
+	</form>
+</body>
+</html>

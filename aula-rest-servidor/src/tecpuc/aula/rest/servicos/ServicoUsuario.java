@@ -14,6 +14,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
@@ -62,7 +63,7 @@ public class ServicoUsuario {
     			
     			lst.add(u);
     		}
-    		
+    		con.close();
     		return lst;
     	}
     	catch (Exception e) {
@@ -86,18 +87,20 @@ public class ServicoUsuario {
     		ps.setInt(1, id);
     		ResultSet rs = ps.executeQuery();
     		
-    		while(rs.next())
+			Usuario u = null;
+    		if(rs.next())
     		{
-    			Usuario u = new Usuario();
+    			u = new Usuario();
     			u.setId( rs.getInt("id") );
     			u.setNome( rs.getString("nome") );
     			u.setEmail( rs.getString("email") );
     			u.setPapel( rs.getString("papel") );
-    			
-    			return u;
     		}
+    		con.close();
     		
-    		throw new WebApplicationException(404);
+    		if(u == null)
+    			throw new WebApplicationException(404);
+    		return u;
     	}
     	catch (Exception e) {
     		throw new WebApplicationException(404);
@@ -123,9 +126,48 @@ public class ServicoUsuario {
     		ps.setString(4, papel);
     		
     		ps.executeUpdate();
+    		
+    		con.close();
     	}
     	catch (Exception e) {
     		throw new WebApplicationException(404);
+		}
+    }
+    
+    @GET
+    @Produces("application/json")
+    @Path("buscar")
+    public List<Usuario> listarNome(@QueryParam("nome")	String nome) 
+    {
+    	try
+    	{
+    		InitialContext ctx = new InitialContext();
+    		DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/tecpuc_rest");
+    		Connection con = ds.getConnection();
+    		
+    		ArrayList<Usuario> lst = new ArrayList<>();
+    		
+    		// 
+    		String sql = "select * from usuarios where  LOWER(nome) like ?";
+    		PreparedStatement ps = con.prepareStatement(sql);
+    		ps.setString(1, "%"+nome.toLowerCase()+"%");
+    		ResultSet rs = ps.executeQuery();
+    		
+    		while(rs.next())
+    		{
+    			Usuario u = new Usuario();
+    			u.setId( rs.getInt("id") );
+    			u.setNome( rs.getString("nome") );
+    			u.setEmail( rs.getString("email") );
+    			u.setPapel( rs.getString("papel") );
+    			
+    			lst.add(u);
+    		}
+    		con.close();
+    		return lst;
+    	}
+    	catch (Exception e) {
+    		return new ArrayList<Usuario>();
 		}
     }
 }
