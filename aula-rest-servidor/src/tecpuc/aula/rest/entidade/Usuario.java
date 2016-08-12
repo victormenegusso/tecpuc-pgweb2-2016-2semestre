@@ -8,6 +8,7 @@ public class Usuario {
 	private String nome;
 	private String email;
 	private String papel;
+	private String senha;
 	public int getId() {
 		return id;
 	}
@@ -31,6 +32,12 @@ public class Usuario {
 	}
 	public void setPapel(String papel) {
 		this.papel = papel;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,8 +18,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
-
-
+import javax.ws.rs.core.Response;
 
 import tecpuc.aula.rest.entidade.Usuario;
 
@@ -107,6 +107,7 @@ public class ServicoUsuario {
 		}
     }
     
+    /*
     @POST
     public void criar(@FormParam("nome") String nome, @FormParam("email") String email,
     		@FormParam("senha") String senha, @FormParam("papel") String papel)
@@ -132,6 +133,35 @@ public class ServicoUsuario {
     	catch (Exception e) {
     		throw new WebApplicationException(404);
 		}
+    }*/
+    
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response criar(Usuario u)
+    {
+    	try
+    	{
+    		InitialContext ctx = new InitialContext();
+    		DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/tecpuc_rest");
+    		Connection con = ds.getConnection();
+    		    		
+    		// 
+    		String sql = "insert into usuarios (nome,email,senha,papel) values (?,?,?,?) ";
+    		PreparedStatement ps = con.prepareStatement(sql);
+    		ps.setString(1, u.getNome());
+    		ps.setString(2, u.getEmail());
+    		ps.setString(3, u.getSenha());
+    		ps.setString(4, u.getPapel());
+    		
+    		ps.executeUpdate();
+    		
+    		con.close();
+    	}
+    	catch (Exception e) {
+    		throw new WebApplicationException(404);
+		}
+    	
+    	return Response.status(201).entity(u).build();
     }
     
     @GET
