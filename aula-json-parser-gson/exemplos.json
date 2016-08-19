@@ -1,0 +1,28 @@
+Objeto Cliente
+
+{
+	id : 1,
+	nome : "Victor",
+	email : "victormenegusso@gmail.com"
+}
+
+Lista de Emails
+
+	[ "victormenegusso@gmail.com" , "teste@teste.com" , "javeiro@php.com" ]
+
+
+Lista de Clientes
+
+[
+	{
+		id : 1,
+		nome : "Victor",
+		email : "victormenegusso@gmail.com"
+	} ,
+	
+	{
+		id : 2,
+		nome : "Stalone",
+		email : "stalone@mercenario.com"
+	}
+]
