@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import aula.entidade.Funcionario;
@@ -44,6 +43,63 @@ public class FuncionarioDAO {
 			// imprimir o erro no console //
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean excluir(String cpf) {
+		int quantidadeLinhas = 0;
+		try {
+			// obtendo conexão //
+			Connection con = obterConexao();
+			
+			// preparando a sql //
+			String sql = "delete from funcionarios where cpf = ?";
+			PreparedStatement comando = con.prepareStatement(sql);
+			comando.setString(1, cpf);
+
+			// executando sql //
+			quantidadeLinhas = comando.executeUpdate();
+
+			// fechando
+			comando.close();
+			con.close();
+		} catch (Exception e) {
+			// imprimir o erro no console //
+			e.printStackTrace();
+		}
+		
+		if(quantidadeLinhas > 0)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean editarSalario(String cpf, double novoSalario) {
+		int quantidadeLinhas = 0;
+		try {
+			// obtendo conexão //
+			Connection con = obterConexao();
+			
+			// preparando a sql //
+			String sql = "update funcionarios set salario = ? where cpf = ?";
+			PreparedStatement comando = con.prepareStatement(sql);
+			comando.setDouble(1, novoSalario);
+			comando.setString(2, cpf);
+
+			// executando sql //
+			quantidadeLinhas = comando.executeUpdate();
+
+			// fechando
+			comando.close();
+			con.close();
+		} catch (Exception e) {
+			// imprimir o erro no console //
+			e.printStackTrace();
+		}
+		
+		if(quantidadeLinhas > 0)
+			return true;
+		else
+			return false;
 	}
 
 	public ArrayList<Funcionario> listar(){
