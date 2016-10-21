@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/CarregadorImagem")
-public class CarregadorImagem extends HttpServlet 
+@WebServlet("/CarregadorArquivos1")
+public class CarregadorArquivos1 extends HttpServlet 
 {
     
     @Override
@@ -19,13 +19,19 @@ public class CarregadorImagem extends HttpServlet
     		throws ServletException, IOException 
     {
     	
-    	String imageId = "/home/victor/java.png";
-    	
-    	byte[] imageData = carregarImagem(imageId);
-    	
-    	response.setContentType("image/png");
-    	response.getOutputStream().write(imageData);
-    	
+    	String pathBase = "/home/victor/";
+    	String codigo = request.getParameter("c");
+    	String content_type = request.getParameter("ct");
+    	try
+    	{
+    		byte[] imageData = carregarImagem(pathBase+codigo);
+    		
+        	response.setContentType(content_type);
+        	response.getOutputStream().write(imageData);
+    	}
+    	catch (Exception e) {
+    		response.sendError(404);
+    	}
     }
 
     private static byte[] carregarImagem(String path) throws FileNotFoundException, IOException {
